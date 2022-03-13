@@ -17,24 +17,30 @@ function eventListeners() {
 
 function addNewItem(e) {
 
-    if (input.value === "") {
+    if (input.value !== "") {
+
+        const newTask = document.createElement("li");
+        newTask.className = "list-group-item list-group-item-secondary";
+        newTask.appendChild(document.createTextNode(input.value));
+
+        const deleteItem = document.createElement("a");
+        deleteItem.classList = "delete-item float-right";
+        deleteItem.setAttribute("href", "#");
+        deleteItem.innerHTML = '<i class="fas fa-times"></i>';
+
+        newTask.appendChild(deleteItem);
+        taskList.appendChild(newTask);
+        input.value = "";
+        e.preventDefault();
+    }
+    
+    else {
 
         alert("Please add a new task");
+        e.preventDefault();
+
     }
 
-    const newTask = document.createElement("li");
-    newTask.className = "list-group-item list-group-item-secondary";
-    newTask.appendChild(document.createTextNode(input.value));
-
-    const deleteItem = document.createElement("a");
-    deleteItem.classList = "delete-item float-right";
-    deleteItem.setAttribute("href", "#");
-    deleteItem.innerHTML = '<i class="fas fa-times"></i>';
-
-    newTask.appendChild(deleteItem);
-    taskList.appendChild(newTask);
-    input.value = "";
-    e.preventDefault();
 }
 
 function deleteOneItem(e) {
@@ -60,5 +66,6 @@ function deleteAllitems(e) {
     }
 
     e.preventDefault();
-
+    window.location.reload();
+    
 }
