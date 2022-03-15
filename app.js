@@ -30,7 +30,8 @@ function addNewItem(e) {
 
         newTask.appendChild(deleteItem);
         taskList.appendChild(newTask);
-        input.value = "";
+        form.reset();
+        input.focus();
         e.preventDefault();
     }
     
@@ -45,7 +46,6 @@ function addNewItem(e) {
 
 function deleteOneItem(e) {
 
-
     if (e.target.className == "fas fa-times") {
 
         if (confirm("Are you sure?")) {
@@ -55,6 +55,7 @@ function deleteOneItem(e) {
 
     }
 
+    input.focus();
     e.preventDefault();
 }
 
@@ -62,10 +63,13 @@ function deleteAllitems(e) {
 
     if (confirm("Are you sure?")) {
 
-        taskList.remove();
+        while (taskList.firstElementChild !== null) {
+
+            taskList.removeChild(taskList.firstElementChild);
+        }
     }
 
     e.preventDefault();
-    window.location.reload();
+    input.focus();
     
 }
